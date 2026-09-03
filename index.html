@@ -789,7 +789,7 @@
             <div class="cover-guest-block">
                 <p class="cover-guest-label">Kepada Yth.</p>
                 <p class="cover-guest-label">Bapak/Ibu/Saudara/i</p>
-                <div class="cover-guest-name" id="guestName">Gamabunta</div>
+                <div class="cover-guest-name" id="guestName">Tamu Undangan</div>
                 <p class="cover-guest-note">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
             </div>
 
@@ -1138,13 +1138,19 @@
         });
     }
 
+    // Dynamic guest name parsing from URL parameters
     const params = new URLSearchParams(window.location.search);
-    const guest = params.get('to');
+    const guest = params.get('to') || params.get('nama') || params.get('guest');
+
     if (guest) {
-        const decodedGuest = decodeURIComponent(guest);
-        document.getElementById('guestName').innerText = decodedGuest;
-        document.getElementById('heroGuestName').innerText = decodedGuest;
-        document.getElementById('name').value = decodedGuest;
+        const decodedGuest = decodeURIComponent(guest.replace(/\+/g, ' '));
+        const guestNameCover = document.getElementById('guestName');
+        const guestNameHero = document.getElementById('heroGuestName');
+        const rsvpInput = document.getElementById('name');
+
+        if (guestNameCover) guestNameCover.innerText = decodedGuest;
+        if (guestNameHero) guestNameHero.innerText = decodedGuest;
+        if (rsvpInput) rsvpInput.value = decodedGuest;
     }
 
     /* --- Slide per Section Button Action --- */
