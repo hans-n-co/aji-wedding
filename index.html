@@ -906,7 +906,7 @@
                 <p style="font-size: 0.9rem; font-weight: 600;">Senin, 5 Oktober 2026</p>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Pukul 12:00 - Selesai</p>
                 <p style="font-size: 0.85rem; margin-top: 5px;">Rumah Mbah Modin<br>Rt 01/12, Desa Gembong, Kec. Gembong, Kab. Pati</p>
-                <a href="https://www.google.com/maps/place/DAGING+KAMBING+GEMBONG,+Dk,+RT.1%2FRW.12,+Ngembes,+Gembong,+Kec.+Gembong,+Kabupaten+Pati,+Jawa+Tengah+59162/data=!4m2!3m1!1s0x2e70d7fafd8a3127:0x53fd515f2fccaaf2!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjM0LjYYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsOTQyODA1NzYsOTQyMDczOTQsOTQyMDc1MDYsOTQyMDg1MDYsOTQyMTg2NTMsOTQyMjk4MzksOTQyNzUxNjgsOTQyNzk2MTksMTAwODE1NjQwLDEwMDgyMDIzNywxMDA4MjI0OTRCAklE&skid=213f271f-deb4-4f28-b819-8225b82088f6&g_st=aw" target="_blank" class="btn">Google Maps</a>
+                <a href="https://www.google.com/maps/place/DAGING+KAMBING+GEMBONG,+Dk,+RT.1%2FRW.12,+Ngembes,+Gembong,+Kec.+Gembong,+Kabupaten+Pati,+Jawa+Tengah+59162/data=!4m2!3m1!1s0x2e70d7fafd8a3127:0x53fd515f2fccaaf2!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjM0LjYYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsOTQyODA1NzYsOTQy07M5NDQsOTQyMDc1MDYsOTQyMDg1MDYsOTQyMTg2NTMsOTQyMjk4MzksOTQyNzUxNjgsOTQyNzk2MTksMTAwODE1NjQwLDEwMDgyMDIzNywxMDA4MjI0OTRCAklE&skid=213f271f-deb4-4f28-b819-8225b82088f6&g_st=aw" target="_blank" class="btn">Google Maps</a>
             </div>
         </section>
 
@@ -1017,6 +1017,14 @@
             </form>
         </section>
 
+        <!-- 8. Live Comments Display -->
+        <section class="reveal" id="commentsSection">
+            <h2>Ucapan & Doa</h2>
+            <div class="comment-list" id="commentList">
+                <!-- Real-time Firestore comments will render here -->
+            </div>
+        </section>
+
         <!-- Video Section -->
         <section class="reveal">
             <h2>Wedding Video</h2>
@@ -1096,6 +1104,73 @@
         </div>
     </div>
 
+    <!-- Firebase SDK Configuration -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { 
+        getFirestore, 
+        collection, 
+        addDoc, 
+        onSnapshot, 
+        query, 
+        orderBy, 
+        serverTimestamp 
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+      // Firebase configuration using your project ID
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY", // Get from Firebase Console > Project Settings
+        authDomain: "aji-wedding-database.firebaseapp.com",
+        projectId: "aji-wedding-database",
+        storageBucket: "aji-wedding-database.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID", // Get from Firebase Console
+        appId: "YOUR_APP_ID" // Get from Firebase Console
+      };
+
+      // Initialize Firebase & Firestore
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const commentsRef = collection(db, "comments");
+
+      // Real-time listener to load and render comments
+      const q = query(commentsRef, orderBy("timestamp", "desc"));
+      onSnapshot(q, (snapshot) => {
+        const commentList = document.getElementById('commentList');
+        if (!commentList) return;
+        
+        commentList.innerHTML = '';
+
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const commentItem = document.createElement('div');
+          commentItem.className = 'comment-item';
+
+          const isHadir = data.status === 'Hadir';
+          const badgeClass = isHadir ? 'badge-hadir' : 'badge-absent';
+
+          commentItem.innerHTML = `
+            <div class="comment-header">
+                <span class="comment-author">${escapeHTML(data.name || '')}</span>
+                <span class="comment-badge ${badgeClass}">${data.status || 'Hadir'}</span>
+            </div>
+            <div class="comment-text">${escapeHTML(data.message || '')}</div>
+          `;
+          commentList.appendChild(commentItem);
+        });
+      });
+
+      // Submit function exposed globally
+      window.submitToFirebase = async function(name, status, message) {
+        await addDoc(commentsRef, {
+          name: name,
+          status: status,
+          message: message,
+          timestamp: serverTimestamp()
+        });
+      };
+    </script>
+
+    <!-- Main Page Controls Script -->
     <script>
     function openModal(id) {
         document.getElementById(id).classList.add('active');
@@ -1194,7 +1269,7 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    function handleRSVP(e) {
+    async function handleRSVP(e) {
         e.preventDefault();
 
         const name = document.getElementById('name').value.trim();
@@ -1203,27 +1278,19 @@
 
         if (!name || !message) return;
 
-        const commentItem = document.createElement('div');
-        commentItem.className = 'comment-item';
-
-        const isHadir = status === 'Hadir';
-        const badgeClass = isHadir ? 'badge-hadir' : 'badge-absent';
-
-        commentItem.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-author">${escapeHTML(name)}</span>
-                <span class="comment-badge ${badgeClass}">${status}</span>
-            </div>
-            <div class="comment-text">${escapeHTML(message)}</div>
-        `;
-
-        const commentList = document.getElementById('commentList');
-        commentList.insertBefore(commentItem, commentList.firstChild);
-
-        alert('Terima kasih! Ucapan dan konfirmasi kehadiran Anda telah tersimpan.');
-        
-        e.target.reset();
-        document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
+        try {
+            await window.submitToFirebase(name, status, message);
+            alert('Terima kasih! Ucapan dan konfirmasi kehadiran Anda telah tersimpan.');
+            e.target.reset();
+            
+            const commentsSec = document.getElementById('commentsSection');
+            if (commentsSec) {
+                commentsSec.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (error) {
+            console.error("Error saving comment: ", error);
+            alert('Gagal menyimpan ucapan. Pastikan kunci API sudah benar atau Firestore dalam mode Test.');
+        }
     }
 
     function escapeHTML(str) {
