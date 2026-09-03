@@ -30,6 +30,15 @@
             padding: 0;
         }
 
+        /* --- Enabled Scroll Snap for Page/Section Sliding --- */
+        html, body {
+            height: 100%;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark);
@@ -211,23 +220,26 @@
             color: var(--text-main);
         }
 
+        /* --- Section Slide Snapping Styling --- */
         section {
-            padding: 60px 25px;
+            padding: 40px 25px;
             text-align: center;
             border-bottom: 1px solid var(--border-gold-light);
             position: relative;
-        }
-
-        .hero-section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+        }
+
+        .hero-section {
             padding: 60px 20px 40px;
             background: linear-gradient(180deg, rgba(246, 241, 233, 0.85) 0%, rgba(246, 241, 233, 0.95) 60%, var(--bg-card) 100%),
                         url('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
-            position: relative;
+            justify-content: space-between;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
         }
 
@@ -376,12 +388,12 @@
         }
 
         .profile-card {
-            margin: 30px 0;
+            margin: 15px 0;
         }
 
         .profile-img {
-            width: 170px;
-            height: 200px;
+            width: 150px;
+            height: 180px;
             border-radius: 100px;
             object-fit: cover;
             border: 2px solid var(--gold);
@@ -399,10 +411,10 @@
 
         .person-name {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--maroon-dark);
-            margin-top: 10px;
+            margin-top: 6px;
         }
 
         .story-grid {
@@ -410,6 +422,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-top: 25px;
+            width: 100%;
         }
 
         .story-card {
@@ -451,6 +464,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin-top: 25px;
+            width: 100%;
         }
 
         .gallery-item {
@@ -544,10 +558,11 @@
             background: rgba(255, 255, 255, 0.7);
             border: 1.5px solid var(--gold);
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 15px;
+            margin-top: 15px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%;
         }
 
         .bank-logo {
@@ -560,7 +575,7 @@
         .account-number {
             font-size: 1.1rem;
             letter-spacing: 2px;
-            margin: 10px 0;
+            margin: 6px 0;
             color: var(--text-dark);
             font-weight: 600;
         }
@@ -632,9 +647,10 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             text-align: left;
-            margin-top: 20px;
+            margin-top: 15px;
+            width: 100%;
         }
 
         label {
@@ -646,7 +662,7 @@
 
         input, select, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.8);
             border: 1.5px solid var(--gold);
             color: var(--text-main);
@@ -660,20 +676,21 @@
         }
 
         .comment-list {
-            margin-top: 25px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-height: 400px;
+            gap: 12px;
+            max-height: 350px;
             overflow-y: auto;
             text-align: left;
             padding-right: 5px;
+            width: 100%;
         }
 
         .comment-item {
             background: rgba(255, 255, 255, 0.8);
             border: 1.5px solid var(--gold);
-            padding: 15px;
+            padding: 12px;
             border-radius: 10px;
             animation: fadeIn 0.5s ease;
         }
@@ -719,7 +736,7 @@
 
         .thankyou-section {
             position: relative;
-            padding: 80px 25px;
+            padding: 60px 25px;
             background: linear-gradient(180deg, rgba(246, 241, 233, 0.85) 0%, rgba(246, 241, 233, 0.95) 100%), 
                         url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
             text-align: center;
@@ -743,6 +760,7 @@
             color: var(--text-muted);
             background: var(--bg-card);
             border-top: 1px solid var(--border-gold);
+            scroll-snap-align: end;
         }
     </style>
 </head>
@@ -754,7 +772,7 @@
 
     <div class="controls">
         <button class="ctrl-btn" id="musicToggle" title="Toggle Music">🎵</button>
-        <button class="ctrl-btn" id="scrollToggle" title="Toggle Auto Scroll">📜</button>
+        <button class="ctrl-btn" id="scrollToggle" title="Next Slide">📜</button>
     </div>
 
     <!-- Cover Page -->
@@ -811,22 +829,22 @@
         <!-- Mempelai Section -->
         <section class="reveal">
             <div class="subtitle-cover">Groom & Bride</div>
-            <h2 style="margin-top: 10px;">Mempelai</h2>
+            <h2 style="margin-top: 5px;">Mempelai</h2>
 
             <div class="profile-card">
                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Muhajianto" class="profile-img" onclick="openProfileModal(this.src, 'Muhajianto, S.Hum.')">
                 <div class="person-name">Muhajianto, S.Hum.</div>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">Putra Pertama dari Bapak Muhammad Syahruddin & Ibu Siti Rahma</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Putra Pertama dari Bapak Muhammad Syahruddin & Ibu Siti Rahma</p>
             </div>
 
-            <p style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #4a2e1b;">&</p>
+            <p style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: #4a2e1b;">&</p>
 
             <div class="profile-card">
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Gurnita Maya Shofa" class="profile-img" onclick="openProfileModal(this.src, 'Gurnita Maya Shofa, S.H.')">
                 <div class="person-name">Gurnita Maya Shofa, S.H.</div>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">Putri Kedua dari Bapak H. Sukari & Ibu Hj. Susanah</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Putri Kedua dari Bapak H. Sukari & Ibu Hj. Susanah</p>
             </div>
-            <p class="quote" style="margin-bottom: 25px;">“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri...”<br><span style="color: var(--maroon-dark); font-size: 0.8rem; font-style: normal; font-weight: 600;">Q.S. Ar-Rum: 21</span></p>
+            <p class="quote" style="margin-top: 10px;">“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”<br><span style="color: var(--maroon-dark); font-size: 0.75rem; font-style: normal; font-weight: 600;">Q.S. Ar-Rum: 21</span></p>
         </section>
 
         <!-- Countdown Section -->
@@ -847,7 +865,7 @@
         <section class="reveal">
             <h2>Acara & Lokasi</h2>
 
-            <div style="margin-bottom: 35px;">
+            <div style="margin-bottom: 25px;">
                 <h3>Akad Nikah</h3>
                 <p style="font-size: 0.9rem; font-weight: 600;">Senin, 5 Oktober 2026</p>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Pukul 09:00 WIB - Selesai</p>
@@ -1129,21 +1147,9 @@
         document.getElementById('name').value = decodedGuest;
     }
 
-    let autoScrollInterval = null;
-    let isAutoScrolling = false;
-
-    function toggleAutoScroll() {
-        if (isAutoScrolling) {
-            clearInterval(autoScrollInterval);
-            isAutoScrolling = false;
-            document.getElementById('scrollToggle').innerText = '📜';
-        } else {
-            isAutoScrolling = true;
-            document.getElementById('scrollToggle').innerText = '⏸️';
-            autoScrollInterval = setInterval(() => {
-                window.scrollBy({ top: 1, behavior: 'smooth' });
-            }, 30);
-        }
+    /* --- Slide per Section Button Action --- */
+    function slideNextSection() {
+        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
     }
 
     const audio = document.getElementById('bgMusic');
@@ -1159,7 +1165,7 @@
         }
     });
 
-    document.getElementById('scrollToggle').addEventListener('click', toggleAutoScroll);
+    document.getElementById('scrollToggle').addEventListener('click', slideNextSection);
 
     function startInvitation() {
         document.getElementById('cover').classList.add('opened');
