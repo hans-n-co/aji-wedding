@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+	<link rel="icon" type="image/x-icon" href="D:\WhatsApp Image 2026-08-29 at 15.41.20.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Updated palette to match cover section */
+            --bg-dark: #1f0b0e;
+            --bg-card: #f6f1e9;
+            --cream-overlay: rgba(246, 241, 233, 0.92);
+            --gold: #b89758;
+            --gold-light: #d4b475;
+            --gold-dark: #8c6f34;
+            --text-main: #332219;
+            --text-muted: #77665c;
+            --text-dark: #2b1810;
+            --border-gold: #b89758;
+            --border-gold-light: rgba(184, 151, 88, 0.4);
+            --maroon-dark: #5a121a;
+            --maroon-hover: #7a1b25;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Redesigned Cover Page 1 (Matching Provided Reference) --- */
+        #cover {
+            position: fixed;
+            inset: 0;
+            background: #2a080c url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            text-align: center;
+            padding: 15px;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+        }
+
+        #cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(15, 5, 8, 0.75) 100%);
+            pointer-events: none;
+        }
+
+        #cover.opened {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Main Arch Container */
+        .cover-arch-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 410px;
+            background: var(--cream-overlay);
+            border-radius: 200px 200px 0 0;
+            padding: 45px 25px 35px;
+            border: 3px solid var(--gold);
+            outline: 6px solid rgba(246, 241, 233, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-main);
+        }
+
+        /* Script Title: "The Wedding Of" */
+        .cover-script-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #4a2e1b;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Center Oval/Circular Photo Frame */
+        .cover-photo-frame {
+            position: relative;
+            width: 200px;
+            height: 240px;
+            border-radius: 120px;
+            border: 2px solid var(--gold);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+        }
+
+        .cover-photo-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 115px;
+            object-fit: cover;
+        }
+
+        /* Groom & Bride Names */
+        .cover-names {
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Guest Details Block */
+        .cover-guest-block {
+            margin-bottom: 25px;
+        }
+
+        .cover-guest-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: #55443d;
+            font-style: italic;
+        }
+
+        .cover-guest-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 6px 0 4px;
+        }
+
+        .cover-guest-note {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-style: italic;
+            max-width: 260px;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        /* Maroon Rounded Button */
+        .btn-buka {
+            background: var(--maroon-dark);
+            color: #f6f1e9;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(90, 18, 26, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-buka:hover {
+            background: var(--maroon-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(90, 18, 26, 0.6);
+        }
+
+        /* --- Main Floating Action Controls --- */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .ctrl-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--maroon-dark);
+            border: 1px solid var(--gold);
+            color: #f6f1e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .ctrl-btn:hover {
+            background: var(--maroon-hover);
+            color: #ffffff;
+        }
+
+        /* --- Main Layout & Container --- */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border-left: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        section {
+            padding: 60px 25px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-gold-light);
+            position: relative;
+        }
+
+        /* --- Cover Page 2 / Hero Section --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, rgba(246, 241, 233, 0.85) 0%, rgba(246, 241, 233, 0.95) 60%, var(--bg-card) 100%),
+                        url('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(184, 151, 88, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: auto 0;
+        }
+
+        .hero-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #4a2e1b;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+
+        .hero-groom-name, .hero-bride-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--maroon-dark);
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .hero-ampersand-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .hero-ampersand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #4a2e1b;
+            line-height: 1;
+        }
+
+        .hero-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            letter-spacing: 1.5px;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        .scroll-indicator-wrapper {
+            position: relative;
+            z-index: 2;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .scroll-pill {
+            width: 26px;
+            height: 48px;
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--maroon-dark);
+            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(184, 151, 88, 0.2);
+            animation: bouncePill 2s infinite ease-in-out;
+        }
+
+        @keyframes bouncePill {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        .guest-card-hero {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            border-top: 1px dashed var(--gold);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .disclaimer-text {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* Scroll Reveal Animation Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Headings */
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--maroon-dark);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--maroon-dark);
+        }
+
+        p.quote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .subtitle-cover {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #55443d;
+            font-style: italic;
+        }
+
+        /* Couple Section */
+        .profile-card {
+            margin: 30px 0;
+        }
+
+        .profile-img {
+            width: 170px;
+            height: 200px;
+            border-radius: 100px;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: var(--gold-dark);
+        }
+
+        .person-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin-top: 10px;
+        }
+
+        /* --- Love Story Grid & Modals --- */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1.5px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .story-card:hover {
+            border-color: var(--gold-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(184, 151, 88, 0.25);
+        }
+
+        .story-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .story-title {
+            font-family: 'Cinzel', serif;
+            color: var(--maroon-dark);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .story-year {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Modal Base */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 5, 8, 0.85);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            color: var(--text-main);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--maroon-dark);
+            cursor: pointer;
+            line-height: 1;
+            z-index: 1;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            margin: 15px 0;
+        }
+
+        .lightbox-img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            margin: 15px 0;
+            background: var(--bg-card);
+        }
+
+        .modal-text {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        /* --- Pre-Wedding 2-Column Gallery Grid --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+            filter: brightness(1.05);
+        }
+
+        /* --- Video Section --- */
+        .video-container {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: var(--bg-card);
+        }
+
+        .wedding-video {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        /* Digital Gift Cards */
+        .gift-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1.5px solid var(--gold);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .bank-logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--maroon-dark);
+            font-family: 'Cinzel', serif;
+        }
+
+        .account-number {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--maroon-dark);
+            color: #f6f1e9;
+            border: 1.5px solid var(--gold);
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: var(--maroon-hover);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(90, 18, 26, 0.3);
+        }
+
+        .btn-sm {
+            padding: 6px 15px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+
+        /* Countdown Grid */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid var(--gold);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 65px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .time-box span {
+            display: block;
+            color: var(--maroon-dark);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .time-box small {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* RSVP Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 0.8rem;
+            color: var(--maroon-dark);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid var(--gold);
+            color: var(--text-main);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--maroon-dark);
+        }
+
+        /* --- Comment Section Styling --- */
+        .comment-list {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 5px;
+        }
+
+        .comment-item {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid var(--gold);
+            padding: 15px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .comment-author {
+            color: var(--maroon-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .comment-badge {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .badge-hadir {
+            background: rgba(46, 125, 50, 0.15);
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+        }
+
+        .badge-absent {
+            background: rgba(198, 40, 40, 0.15);
+            color: #c62828;
+            border: 1px solid #c62828;
+        }
+
+        .comment-text {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            word-break: break-word;
+        }
+
+        /* --- Thank You Section --- */
+        .thankyou-section {
+            position: relative;
+            padding: 80px 25px;
+            background: linear-gradient(180deg, rgba(246, 241, 233, 0.85) 0%, rgba(246, 241, 233, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .thankyou-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.image2url.com/r2/default/audio/1787981628486-361732f1-e377-4d94-becc-1eb3aa77a702.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="controls">
+        <button class="ctrl-btn" id="musicToggle" title="Toggle Music">🎵</button>
+        <button class="ctrl-btn" id="scrollToggle" title="Toggle Auto Scroll">📜</button>
+    </div>
+
+    <!-- Cover Page 1: Recreated to Match Reference Image -->
+    <div id="cover">
+        <div class="cover-arch-container">
+            <div class="cover-script-title">The Wedding Of</div>
+            
+            <div class="cover-photo-frame">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80" alt="Couple Photo">
+            </div>
+
+            <div class="cover-names">AJI & MAYA</div>
+
+            <div class="cover-guest-block">
+                <p class="cover-guest-label">Kepada Yth.</p>
+                <p class="cover-guest-label">Bapak/Ibu/Saudara/i</p>
+                <div class="cover-guest-name" id="guestName">Gamabunta</div>
+                <p class="cover-guest-note">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
+            </div>
+
+            <button class="btn-buka" onclick="startInvitation()">
+                <span>✉</span> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Cover Page 2: Hero Section -->
+        <section class="reveal hero-section">
+            <div class="hero-content">
+                <div class="hero-subtitle">The Wedding Of</div>
+                
+                <div class="hero-groom-name">AJI</div>
+
+                <div class="hero-ampersand-wrapper">
+                    <span class="hero-ampersand">&</span>
+                </div>
+
+                <div class="hero-bride-name">MAYA</div>
+
+                <div class="hero-date">Senin, 5 Oktober 2026</div>
+
+                <!-- Animated Scroll Indicator Pill -->
+                <div class="scroll-indicator-wrapper">
+                    <div class="scroll-pill">
+                        <span>↓</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guest-card-hero">
+                <p style="font-size: 0.8rem; color: var(--text-muted);" class="subtitle-cover">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+                <p id="heroGuestName" style="color: var(--maroon-dark); font-weight: 700; font-size: 1.25rem; margin-top: 6px; font-family: 'Cinzel', serif;">Tamu Undangan</p>
+                <p class="disclaimer-text">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
+            </div>
+        </section>
+
+        <!-- 1. Mempelai Section -->
+        <section class="reveal">
+            <div class="subtitle-cover">Groom & Bride</div>
+            <h2 style="margin-top: 10px;">Mempelai</h2>
+
+            <div class="profile-card">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Muhajianto, S.Hum." class="profile-img" onclick="openProfileModal(this.src, 'Aldian Pratama, S.T.')">
+                <div class="person-name">Muhajianto, S.Hum.</div>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Putra Pertama dari Bapak Muhammad Syahruddin & Ibu Siti Rahma</p>
+            </div>
+
+            <p style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #4a2e1b;">&</p>
+
+            <div class="profile-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Gurnita Maya Shofa, S.H." class="profile-img" onclick="openProfileModal(this.src, 'Maya Rahmadani, S.Ked.')">
+                <div class="person-name">Gurnita Maya Shofa, S.H.</div>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Putri Kedua dari Bapak H. Sukari & Ibu Hj. Susanah</p>
+            </div>
+            <p class="quote" style="margin-bottom: 25px;">“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya...”<br><span style="color: var(--maroon-dark); font-size: 0.8rem; font-style: normal; font-weight: 600;">Q.S. Ar-Rum: 21</span></p>
+        </section>
+
+        <!-- 2. Countdown Section -->
+        <section class="reveal">
+            <div class="subtitle-cover">Menghitung Hari</div>
+            <div class="hero-groom-name" style="font-size: 2.2rem; margin-top: 5px;">Aji & Maya</div>
+            <p style="color: var(--text-muted); margin-top: 5px;">Senin, 5 Oktober 2026</p>
+
+            <div class="countdown">
+                <div class="time-box"><span id="days">00</span><small>Hari</small></div>
+                <div class="time-box"><span id="hours">00</span><small>Jam</small></div>
+                <div class="time-box"><span id="minutes">00</span><small>Menit</small></div>
+                <div class="time-box"><span id="seconds">00</span><small>Detik</small></div>
+            </div>
+        </section>
+
+        <!-- 3. Acara & Lokasi Section -->
+        <section class="reveal">
+            <h2>Acara & Lokasi</h2>
+
+            <div style="margin-bottom: 35px;">
+                <h3>Akad Nikah</h3>
+                <p style="font-size: 0.9rem; font-weight: 600;">Senin, 5 Oktober 2026</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Pukul 09:00 WIB - Selesai</p>
+            </div>
+
+            <div>
+                <h3>Resepsi</h3>
+                <p style="font-size: 0.9rem; font-weight: 600;">Senin, 5 Oktober 2026</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Pukul 12:00 - Selesai</p>
+                <p style="font-size: 0.85rem; margin-top: 5px;">Rumah Mbah Modin<br>Rt 01/12, Desa Gembong, Kec. Gembong, Kab. Pati</p>
+                <a href="https://www.google.com/maps/place/DAGING+KAMBING+GEMBONG,+Dk,+RT.1%2FRW.12,+Ngembes,+Gembong,+Kec.+Gembong,+Kabupaten+Pati,+Jawa+Tengah+59162/data=!4m2!3m1!1s0x2e70d7fafd8a3127:0x53fd515f2fccaaf2!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjM0LjYYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsOTQyODA1NzYsOTQyMDczOTQsOTQyMDc1MDYsOTQyMDg1MDYsOTQyMTg2NTMsOTQyMjk4MzksOTQyNzUxNjgsOTQyNzk2MTksMTAwODE1NjQwLDEwMDgyMDIzNywxMDA4MjI0OTRCAklE&skid=213f271f-deb4-4f28-b819-8225b82088f6&g_st=aw" target="_blank" class="btn">Google Maps</a>
+            </div>
+        </section>
+
+        <!-- 4. Love Story Section -->
+        <section class="reveal">
+            <h2>Love Story</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Klik kartu untuk membaca kisah kami</p>
+
+            <div class="story-grid">
+                <div class="story-card" onclick="openModal('modal1')">
+                    <div class="story-icon">☕</div>
+                    <div class="story-title">Pertemuan</div>
+                    <div class="story-year">2024</div>
+                </div>
+                <div class="story-card" onclick="openModal('modal2')">
+                    <div class="story-icon">🌸</div>
+                    <div class="story-title">Pendekatan</div>
+                    <div class="story-year">2025</div>
+                </div>
+                <div class="story-card" onclick="openModal('modal3')">
+                    <div class="story-icon">💍</div>
+                    <div class="story-title">Pertunangan</div>
+                    <div class="story-year">2026</div>
+                </div>
+                <div class="story-card" onclick="openModal('modal4')">
+                    <div class="story-icon">✨</div>
+                    <div class="story-title">Pernikahan</div>
+                    <div class="story-year">2026</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Pre-Wedding Gallery -->
+        <section class="reveal">
+            <h2>Our Moment</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Momen Indah Perjalanan Kami</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openProfileModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe37GiH7gTe_k9n1vWzyLlE-p8X5H-uoZQVpJsgr7eqgg1tNL1iBXqnfqB&s=10', 'Prewedding Moment 1')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe37GiH7gTe_k9n1vWzyLlE-p8X5H-uoZQVpJsgr7eqgg1tNL1iBXqnfqB&s=10" alt="Prewedding 1">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://imgs.mongabay.com/wp-content/uploads/sites/20/2017/01/11172127/Adult-female-Hoolock-tianxing-C-Fan-Pengfei.jpg', 'Prewedding Moment 2')">
+                    <img src="https://imgs.mongabay.com/wp-content/uploads/sites/20/2017/01/11172127/Adult-female-Hoolock-tianxing-C-Fan-Pengfei.jpg" alt="Prewedding 2">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://res.cloudinary.com/roundglass/image/upload/v1748257770/rg/collective/media/dehing-patkai-hoolock-gibbon-family-male-female-tree-hanging-dhritiman-mukherjee_f1nk2m.jpg', 'Prewedding Moment 3')">
+                    <img src="https://res.cloudinary.com/roundglass/image/upload/v1748257770/rg/collective/media/dehing-patkai-hoolock-gibbon-family-male-female-tree-hanging-dhritiman-mukherjee_f1nk2m.jpg" alt="Prewedding 3">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw4_7mWHbBkF3cx8p9W6It9O-Ff255QPd0totEh4w-kGao-OhYaDzI3pI&s=10', 'Prewedding Moment 4')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw4_7mWHbBkF3cx8p9W6It9O-Ff255QPd0totEh4w-kGao-OhYaDzI3pI&s=10" alt="Prewedding 4">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', 'Prewedding Moment 5')">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Prewedding 5">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', 'Prewedding Moment 6')">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Prewedding 6">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80', 'Prewedding Moment 7')">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Prewedding 7">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=600&q=80', 'Prewedding Moment 8')">
+                    <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=600&q=80" alt="Prewedding 8">
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Digital Gift Section -->
+        <section class="reveal">
+            <h2>Wedding Gift</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda ingin memberikan hadiah, kami menyediakan Digital Gift di bawah ini:</p>
+
+            <div class="gift-card">
+                <div class="bank-logo">BANK BCA</div>
+                <div class="account-number" id="accBCA">1234 5678 90</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">a.n. Muhajianto</p>
+                <button class="btn btn-sm" onclick="copyToClipboard('1234567890', 'BCA')">Salin No. Rekening</button>
+            </div>
+
+            <div class="gift-card">
+                <div class="bank-logo">BANK BRI</div>
+                <div class="account-number" id="accMandiri">9876 5432 10</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">a.n. Gurnita Maya Shofa</p>
+                <button class="btn btn-sm" onclick="copyToClipboard('9876543210', 'Mandiri')">Salin No. Rekening</button>
+            </div>
+        </section>
+
+        <!-- 7. RSVP Section -->
+        <section class="reveal">
+            <h2>RSVP</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Konfirmasi kehadiran Anda di bawah ini:</p>
+
+            <form onsubmit="handleRSVP(event)">
+                <div>
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" required placeholder="Masukkan nama Anda">
+                </div>
+                <div>
+                    <label for="status">Konfirmasi Kehadiran</label>
+                    <select id="status">
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="message">Ucapan & Doa</label>
+                    <textarea id="message" rows="3" placeholder="Tulis ucapan selamat..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Kirim RSVP</button>
+            </form>
+        </section>
+
+        <!-- Video Section -->
+        <section class="reveal">
+            <h2>Wedding Video</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Momen Spesial Kami</p>
+
+            <div class="video-container">
+                <video class="wedding-video" autoplay loop muted playsinline>
+                    <source src="https://www.image2url.com/r2/default/videos/1787988060791-b3e489e6-b17f-42f7-8989-a6c030feaa28.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+            </div>
+        </section>
+
+        <!-- 9. Thank You Section -->
+        <section class="reveal thankyou-section">
+            <div class="thankyou-content">
+                <h2>Terima Kasih</h2>
+                <p style="font-size: 0.9rem; margin: 20px 0; color: var(--text-main);">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami.
+                </p>
+                <p style="font-size: 0.85rem; color: var(--maroon-dark); font-weight: 600;">
+                    Semoga Allah SWT membalas segala kebaikan Anda.
+                </p>
+                <div class="hero-groom-name" style="font-size: 2.5rem; margin-top: 25px;">Aji & Maya</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Aji & Maya Wedding Invitation</p>
+        </footer>
+
+    </div>
+
+    <!-- Profile & Gallery Lightbox Modal -->
+    <div id="profileModal" class="modal" onclick="closeModalOnOuterClick(event, 'profileModal')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('profileModal')">&times;</span>
+            <h3 id="profileModalTitle">Mempelai</h3>
+            <img id="profileModalImg" src="" alt="Profile Image" class="lightbox-img">
+        </div>
+    </div>
+
+    <!-- Modals for Love Story -->
+    <div id="modal1" class="modal" onclick="closeModalOnOuterClick(event, 'modal1')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal1')">&times;</span>
+            <h3>Pertemuan</h3>
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Pertemuan" class="modal-img">
+            <p class="modal-text">Awal mula takdir mempertemukan kami di sebuah kedai kopi hangat di tengah kota pada tahun 2021. Tatapan pertama yang sederhana kini berubah menjadi awal perjalanan panjang kami.</p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal" onclick="closeModalOnOuterClick(event, 'modal2')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
+            <h3>Pendekatan</h3>
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" alt="Pendekatan" class="modal-img">
+            <p class="modal-text">Seiring berjalannya waktu, percakapan ringan berubah menjadi rasa saling memahami. Kami tumbuh bersama melalui setiap cerita, canda tawa, dan suka duka kehidupan.</p>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal" onclick="closeModalOnOuterClick(event, 'modal3')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal3')">&times;</span>
+            <h3>Pertunangan</h3>
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=500&q=80" alt="Pertunangan" class="modal-img">
+            <p class="modal-text">Di hadapan kedua keluarga besar, kami mengikat janji suci pertunangan pada tahun 2025 sebagai langkah komitmen menuju jenjang ikatan pernikahan yang lebih sakral.</p>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal" onclick="closeModalOnOuterClick(event, 'modal4')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal4')">&times;</span>
+            <h3>Pernikahan</h3>
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" alt="Pernikahan" class="modal-img">
+            <p class="modal-text">Kini tiba saatnya kami mengabadikan ikatan cinta dalam bentuk pernikahan. Kami siap melangkah bersama menatap masa depan yang dipenuhi kasih dan kebahagiaan.</p>
+        </div>
+    </div>
+
+    <script>
+    function openModal(id) {
+        document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+
+    function closeModalOnOuterClick(e, id) {
+        if (e.target.id === id) {
+            closeModal(id);
+        }
+    }
+
+    function openProfileModal(src, name) {
+        document.getElementById('profileModalImg').src = src;
+        document.getElementById('profileModalTitle').innerText = name;
+        openModal('profileModal');
+    }
+
+    function copyToClipboard(text, bank) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(`No. Rekening ${bank} (${text}) berhasil disalin!`);
+        }).catch(() => {
+            alert('Gagal menyalin nomor rekening.');
+        });
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get('to');
+    if (guest) {
+        const decodedGuest = decodeURIComponent(guest);
+        document.getElementById('guestName').innerText = decodedGuest;
+        document.getElementById('heroGuestName').innerText = decodedGuest;
+        document.getElementById('name').value = decodedGuest;
+    }
+
+    let autoScrollInterval = null;
+    let isAutoScrolling = false;
+
+    function toggleAutoScroll() {
+        if (isAutoScrolling) {
+            clearInterval(autoScrollInterval);
+            isAutoScrolling = false;
+            document.getElementById('scrollToggle').innerText = '📜';
+        } else {
+            isAutoScrolling = true;
+            document.getElementById('scrollToggle').innerText = '⏸️';
+            autoScrollInterval = setInterval(() => {
+                window.scrollBy({ top: 1, behavior: 'smooth' });
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+                    toggleAutoScroll();
+                }
+            }, 30);
+        }
+    }
+
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+
+    musicBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            musicBtn.innerText = '🎵';
+        } else {
+            audio.pause();
+            musicBtn.innerText = '🔇';
+        }
+    });
+
+    document.getElementById('scrollToggle').addEventListener('click', toggleAutoScroll);
+
+    function startInvitation() {
+        document.getElementById('cover').classList.add('opened');
+        audio.play().catch(() => console.log("Audio playback blocked by browser settings."));
+
+        const handleFirstScroll = () => {
+            const heroHeight = document.querySelector('.hero-section').offsetHeight;
+            if (window.scrollY >= heroHeight * 0.5 && !isAutoScrolling) {
+                toggleAutoScroll();
+                window.removeEventListener('scroll', handleFirstScroll);
+            }
+        };
+
+        window.addEventListener('scroll', handleFirstScroll);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function handleRSVP(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const status = document.getElementById('status').value;
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !message) return;
+
+        const commentItem = document.createElement('div');
+        commentItem.className = 'comment-item';
+
+        const isHadir = status === 'Hadir';
+        const badgeClass = isHadir ? 'badge-hadir' : 'badge-absent';
+
+        commentItem.innerHTML = `
+            <div class="comment-header">
+                <span class="comment-author">${escapeHTML(name)}</span>
+                <span class="comment-badge ${badgeClass}">${status}</span>
+            </div>
+            <div class="comment-text">${escapeHTML(message)}</div>
+        `;
+
+        const commentList = document.getElementById('commentList');
+        commentList.insertBefore(commentItem, commentList.firstChild);
+
+        alert('Terima kasih! Ucapan dan konfirmasi kehadiran Anda telah tersimpan.');
+        
+        e.target.reset();
+        document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag)
+        );
+    }
+
+    const targetDate = new Date("Oct 24, 2026 08:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff > 0) {
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+    }, 1000);
+</script>
+</body>
+</html>
