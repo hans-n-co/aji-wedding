@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation</title>
-    <!-- Use a web-accessible icon URL instead of local D:\ path -->
+    <!-- Web-accessible icon -->
     <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=32&q=80">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -493,15 +493,6 @@
             z-index: 1;
         }
 
-        .modal-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid var(--gold);
-            margin: 15px 0;
-        }
-
         .lightbox-img {
             width: 100%;
             max-height: 70vh;
@@ -516,53 +507,6 @@
             font-size: 0.85rem;
             color: var(--text-main);
             line-height: 1.5;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            border: 2px solid var(--gold);
-            aspect-ratio: 4 / 3;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease, filter 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.08);
-            filter: brightness(1.05);
-        }
-
-        .video-container {
-            width: 100%;
-            margin-top: 20px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            background: var(--bg-card);
-        }
-
-        .wedding-video {
-            width: 100%;
-            display: block;
-            border-radius: 10px;
-            outline: none;
         }
 
         .gift-card {
@@ -607,10 +551,15 @@
             font-weight: 500;
         }
 
-        .btn:hover {
+        .btn:hover:not(:disabled) {
             background: var(--maroon-hover);
             color: #ffffff;
             box-shadow: 0 4px 12px rgba(90, 18, 26, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .btn-sm {
@@ -929,7 +878,7 @@
             <h2>RSVP</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted);">Konfirmasi kehadiran Anda di bawah ini:</p>
 
-            <form onsubmit="handleRSVP(event)">
+            <form id="rsvpForm" onsubmit="handleRSVP(event)">
                 <div>
                     <label for="name">Nama Lengkap</label>
                     <input type="text" id="name" required placeholder="Masukkan nama Anda">
@@ -945,7 +894,7 @@
                     <label for="message">Ucapan & Doa</label>
                     <textarea id="message" rows="3" placeholder="Tulis ucapan selamat..." required></textarea>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Kirim RSVP</button>
+                <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Kirim RSVP</button>
             </form>
         </section>
 
@@ -991,6 +940,27 @@
             <p class="modal-text">Awal mula takdir mempertemukan kami pada tahun 2024.</p>
         </div>
     </div>
+    <div id="modal2" class="modal" onclick="closeModalOnOuterClick(event, 'modal2')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
+            <h3>Pendekatan</h3>
+            <p class="modal-text">Saling mengenal lebih dekat dan tumbuh bersama di tahun 2025.</p>
+        </div>
+    </div>
+    <div id="modal3" class="modal" onclick="closeModalOnOuterClick(event, 'modal3')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal3')">&times;</span>
+            <h3>Pertunangan</h3>
+            <p class="modal-text">Mengikat janji suci pertunangan awal tahun 2026.</p>
+        </div>
+    </div>
+    <div id="modal4" class="modal" onclick="closeModalOnOuterClick(event, 'modal4')">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal4')">&times;</span>
+            <h3>Pernikahan</h3>
+            <p class="modal-text">Memulai lembaran baru sebagai suami istri pada 5 Oktober 2026.</p>
+        </div>
+    </div>
 
     <!-- Unified Firebase Module Script -->
     <script type="module">
@@ -1005,7 +975,6 @@
         serverTimestamp 
       } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-      // Integrated correct Firebase configuration
       const firebaseConfig = {
         apiKey: "AIzaSyC-X-zc_gYhytqaKYAPxF5NhP8lcDfm2dk",
         authDomain: "aji-wedding-database.firebaseapp.com",
@@ -1044,10 +1013,12 @@
           `;
           commentList.appendChild(commentItem);
         });
+      }, (error) => {
+        console.error("Firestore error: ", error);
       });
 
       window.submitToFirebase = async function(name, status, message) {
-        await addDoc(commentsRef, {
+        return await addDoc(commentsRef, {
           name: name,
           status: status,
           message: message,
@@ -1132,19 +1103,26 @@
 
     async function handleRSVP(e) {
         e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
         const name = document.getElementById('name').value.trim();
         const status = document.getElementById('status').value;
         const message = document.getElementById('message').value.trim();
 
         if (!name || !message) return;
 
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Sending...';
+
         try {
             await window.submitToFirebase(name, status, message);
             alert('Terima kasih! Ucapan Anda telah tersimpan.');
-            e.target.reset();
+            document.getElementById('rsvpForm').reset();
         } catch (error) {
             console.error("Error saving comment: ", error);
-            alert('Gagal menyimpan ucapan. Periksa aturan keamanan Firestore Anda.');
+            alert('Gagal menyimpan ucapan. Silakan periksa koneksi atau Firestore rules Anda.\n\nError: ' + error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Kirim RSVP';
         }
     }
 
