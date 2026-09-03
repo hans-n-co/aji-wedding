@@ -382,7 +382,7 @@
 
         .subtitle-cover {
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: 2rem;
             color: #55443d;
             font-style: italic;
         }
@@ -486,6 +486,23 @@
 
         .gallery-item:hover img {
             transform: scale(1.08);
+        }
+
+        /* Video Container Below Grid */
+        .video-wrapper {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: #000;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .modal {
@@ -829,12 +846,17 @@
         <!-- Mempelai Section -->
         <section class="reveal">
             <div class="subtitle-cover">Groom & Bride</div>
-            <h2 style="margin-top: 5px;">Mempelai</h2>
+            <h2 style="font-size: 1rem; margin-top: 15px;">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</h2>
+			<p style="font-size: 0.75rem; margin-top: 1px;color: var(--text-muted);">Maha Suci Allah yang telah menciptakan makhluk-</p>
+			<p style="font-size: 0.75rem; margin-top: 1px;color: var(--text-muted);">Nya berpasang-pasangan. Ya Allah semoga ridho-</p>
+			<p style="font-size: 0.75rem; margin-top: 1px;color: var(--text-muted);">Mu tercurah mengiringi pernikahan kami.</p>
 
             <div class="profile-card">
                 <img src="Foto/Sejalur Photo-39.JPG" alt="Muhajianto" class="profile-img" onclick="openProfileModal(this.src, 'Muhajianto, S.Hum.')">
                 <div class="person-name">Muhajianto, S.Hum.</div>
-                <p style="font-size: 0.75rem; color: var(--text-muted);">Putra Pertama dari Bapak Muhammad Syahruddin & Ibu Siti Rahma</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Putra Pertama dari</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">Bapak Muhammad Syahruddin</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">& Ibu Siti Rahma</p>
             </div>
 
             <p style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: #4a2e1b;">&</p>
@@ -842,9 +864,11 @@
             <div class="profile-card">
                 <img src="Foto/Sejalur Photo-43.JPG" alt="Gurnita Maya Shofa" class="profile-img" onclick="openProfileModal(this.src, 'Gurnita Maya Shofa, S.H.')">
                 <div class="person-name">Gurnita Maya Shofa, S.H.</div>
-                <p style="font-size: 0.75rem; color: var(--text-muted);">Putri Kedua dari Bapak H. Sukari & Ibu Hj. Susanah</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Putri Kedua dari</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">Bapak H. Sukari</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">& Ibu Hj. Susanah</p>
             </div>
-            <p class="quote" style="margin-top: 10px;">“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”<br><span style="color: var(--maroon-dark); font-size: 0.75rem; font-style: normal; font-weight: 600;">Q.S. Ar-Rum: 21</span></p>
+            <p class="quote" style="margin-top: 10px;">“Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu....<br><span style="color: var(--maroon-dark); font-size: 0.75rem; font-style: normal; font-weight: 600;">Q.S. Ar-Rum: 21</span></p>
         </section>
 
         <!-- Countdown Section -->
@@ -909,7 +933,7 @@
             </div>
         </section>
 
-        <!-- Our Moment Section (8 Images) -->
+        <!-- Our Moment Section (8 Images + Video) -->
         <section class="reveal">
             <div class="subtitle-cover">Gallery</div>
             <h2>Our Moments</h2>
@@ -940,6 +964,14 @@
                 <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-91.JPG', 'Our Moment 8')">
                     <img src="Foto/Sejalur Photo-91.JPG" alt="Moment 8">
                 </div>
+            </div>
+
+            <!-- Video Player Directly Below Last Image -->
+            <div class="video-wrapper">
+                <video autoplay loop muted playsinline style="pointer-events: none;">
+                    <source src="teaser.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
             </div>
         </section>
 
