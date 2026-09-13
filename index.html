@@ -236,12 +236,12 @@
         }
 
         .hero-section {
-    	padding: 60px 20px 40px;
-    	background: linear-gradient(180deg, rgba(246, 241, 233, 0.3) 0%, rgba(246, 241, 233, 0.7) 60%, var(--bg-card) 100%),
-                	url('Foto/Sejalur Photo-13.JPG') center/cover no-repeat;
-    	justify-content: space-between;
-    	box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-		}
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, rgba(246, 241, 233, 0.3) 0%, rgba(246, 241, 233, 0.7) 60%, var(--bg-card) 100%),
+                        url('Foto/Sejalur Photo-13.JPG') center/cover no-repeat;
+            justify-content: space-between;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+        }
 
         .hero-section::before {
             content: "";
@@ -518,35 +518,65 @@
             transform: scale(1.08);
         }
 
-        /* Video Container Below Grid */
+        /* Expanded & Clickable Video Section */
         .video-wrapper {
             margin-top: 20px;
             width: 100%;
             border-radius: 12px;
             overflow: hidden;
-            border: 2px solid var(--gold);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2.5px solid var(--gold);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
             background: #000;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: scale(1.02);
+            border-color: var(--gold-light);
         }
 
         .video-wrapper video {
             width: 100%;
             height: auto;
+            max-height: 280px;
+            object-fit: cover;
             display: block;
+        }
+
+        .video-overlay-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(31, 11, 14, 0.85);
+            color: #f6f1e9;
+            border: 1px solid var(--gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         .modal {
             position: fixed;
             inset: 0;
-            background: rgba(15, 5, 8, 0.85);
+            background: rgba(15, 5, 8, 0.88);
             z-index: 10000;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
+            cursor: pointer;
         }
 
         .modal.active {
@@ -559,7 +589,7 @@
             border: 2px solid var(--gold);
             border-radius: 15px;
             padding: 25px;
-            max-width: 400px;
+            max-width: 440px;
             width: 100%;
             text-align: center;
             position: relative;
@@ -570,19 +600,20 @@
             overflow-y: auto;
         }
 
-        .modal.active .modal-content {
-            transform: scale(1);
+        .modal-content-video {
+            background: #000;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 10px;
+            max-width: 95vw;
+            width: 800px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: var(--maroon-dark);
-            cursor: pointer;
-            line-height: 1;
-            z-index: 1;
+        .modal.active .modal-content,
+        .modal.active .modal-content-video {
+            transform: scale(1);
         }
 
         .lightbox-img {
@@ -593,6 +624,14 @@
             border: 2px solid var(--gold);
             margin: 15px 0;
             background: var(--bg-card);
+        }
+
+        .lightbox-video {
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            outline: none;
+            display: block;
         }
 
         .modal-text {
@@ -971,7 +1010,7 @@
             </div>
         </section>
 
-        <!-- Our Moment Section (8 Images + Video) -->
+        <!-- Our Moment Section (8 Images + Large Video) -->
         <section class="reveal">
             <div class="subtitle-cover">Gallery</div>
             <h2>Our Moments</h2>
@@ -1004,9 +1043,9 @@
                 </div>
             </div>
 
-            <!-- Video Player Directly Below Last Image -->
-            <div class="video-wrapper">
-                <video autoplay loop muted playsinline style="pointer-events: none;">
+            <!-- Clickable Teaser Video Block -->
+            <div class="video-wrapper" onclick="openVideoModal('Video/teaser.mp4')">
+                <video autoplay loop muted playsinline>
                     <source src="Video/teaser.mp4" type="video/mp4">
                     Browser Anda tidak mendukung tag video.
                 </video>
@@ -1083,18 +1122,26 @@
     </div>
 
     <!-- Profile & Image Lightbox Modal -->
-    <div id="profileModal" class="modal" onclick="closeModalOnOuterClick(event, 'profileModal')">
+    <div id="profileModal" class="modal" onclick="closeModal('profileModal')">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('profileModal')">&times;</span>
             <h3 id="profileModalTitle">Mempelai</h3>
             <img id="profileModalImg" src="" alt="Profile Image" class="lightbox-img">
         </div>
     </div>
 
+    <!-- Fullscreen Video Lightbox Modal -->
+    <div id="videoModal" class="modal" onclick="closeVideoModal()">
+        <div class="modal-content-video" onclick="event.stopPropagation()">
+            <video id="modalVideoPlayer" class="lightbox-video" autoplay loop muted playsinline>
+                <source src="" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+        </div>
+    </div>
+
     <!-- Modals for Love Story (1 image per pop up) -->
-    <div id="modal1" class="modal" onclick="closeModalOnOuterClick(event, 'modal1')">
+    <div id="modal1" class="modal" onclick="closeModal('modal1')">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('modal1')">&times;</span>
             <h3>Pertemuan</h3>
             <img src="Foto/Sejalur Photo-22.JPG" alt="Pertemuan" class="lightbox-img">
             <p class="modal-text">Di antara begitu banyak pertemuan yang hadir dalam hidup, 
@@ -1104,9 +1151,8 @@
 			Dari sana, sebuah kisah perlahan dimulai—tanpa kami tahu ke mana langkahnya akan membawa.</p>
         </div>
     </div>
-    <div id="modal2" class="modal" onclick="closeModalOnOuterClick(event, 'modal2')">
+    <div id="modal2" class="modal" onclick="closeModal('modal2')">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
             <h3>Pendekatan</h3>
             <img src="Foto/Sejalur Photo-68.JPG" alt="Pendekatan" class="lightbox-img">
             <p class="modal-text">Waktu kemudian mempertemukan kami dalam jarak yang lebih dekat. Di tahun 2024, 
@@ -1115,9 +1161,8 @@
 			ingin terus kami hadirkan dalam setiap cerita dan perjalanan.</p>
         </div>
     </div>
-    <div id="modal3" class="modal" onclick="closeModalOnOuterClick(event, 'modal3')">
+    <div id="modal3" class="modal" onclick="closeModal('modal3')">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('modal3')">&times;</span>
             <h3>Pertunangan</h3>
             <img src="Foto/Sejalur Photo-80.JPG" alt="Pertunangan" class="lightbox-img">
             <p class="modal-text">Setelah melewati waktu yang mengajarkan kami tentang arti memahami dan bertumbuh bersama, 
@@ -1126,9 +1171,8 @@
 			Bukan sekadar tentang janji hari ini, melainkan tentang keyakinan untuk berjalan berdampingan menuju hari-hari yang akan datang.</p>
         </div>
     </div>
-    <div id="modal4" class="modal" onclick="closeModalOnOuterClick(event, 'modal4')">
+    <div id="modal4" class="modal" onclick="closeModal('modal4')">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('modal4')">&times;</span>
             <h3>Pernikahan</h3>
             <img src="Foto/Sejalur Photo-93.JPG" alt="Pernikahan" class="lightbox-img">
             <p class="modal-text">Dan kini, sampailah kami pada halaman baru yang telah lama kami nantikan. 
@@ -1207,12 +1251,27 @@
     <script>
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-    function closeModalOnOuterClick(e, id) { if (e.target.id === id) closeModal(id); }
 
     function openProfileModal(src, name) {
         document.getElementById('profileModalImg').src = src;
         document.getElementById('profileModalTitle').innerText = name;
         openModal('profileModal');
+    }
+
+    function openVideoModal(videoSrc) {
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('modalVideoPlayer');
+        player.src = videoSrc;
+        modal.classList.add('active');
+        player.play();
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('modalVideoPlayer');
+        player.pause();
+        player.src = "";
+        modal.classList.remove('active');
     }
 
     function copyToClipboard(text, bank) {
